@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.keyboarddialer">
 
-    <uses-permission android:name="android.permission.CALL_PHONE>"/>
+    <uses-permission android:name="android.permission.CALL_PHONE>" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KeyboardDialer">
+        <activity
+            android:name=".CONTACT3"
+            android:exported="false" />
+        <activity
+            android:name=".CONTACT2"
+            android:exported="false" />
+        <activity
+            android:name=".CONTACT1"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

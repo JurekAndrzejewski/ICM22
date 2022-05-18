@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import android.app.Activity
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,27 +19,42 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val phoneNumber1 = intent.getStringExtra("message_key")
+        val phoneNumber2 = intent.getStringExtra("message_key")
+        val phoneNumber3 = intent.getStringExtra("message_key")
         val mBtn1 = findViewById<Button>(R.id.contact1)
         val mBtn2 = findViewById<Button>(R.id.contact2)
         val mBtn3 = findViewById<Button>(R.id.contact3)
+        if (phoneNumber1 != null) {
+            mBtn1.setTag(phoneNumber1)
+        }
+        if (phoneNumber2 != null) {
+            mBtn2.setTag(phoneNumber2)
+        }
+        if (phoneNumber3 != null) {
+            mBtn3.setTag(phoneNumber3)
+        }
         // implement a setOnLongClickListener to the
         // button that creates a Toast and
         // returns true when actually long-pressed
         mBtn1.setOnLongClickListener {
-            Toast.makeText(applicationContext, "Button Long Pressed", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, CONTACT1::class.java)
+            startActivity(intent)
             true
         }
         mBtn2.setOnLongClickListener {
-            Toast.makeText(applicationContext, "Button Long Pressed", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, CONTACT2::class.java)
+            startActivity(intent)
             true
         }
         mBtn3.setOnLongClickListener {
-            Toast.makeText(applicationContext, "Button Long Pressed", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, CONTACT3::class.java)
+            startActivity(intent)
             true
         }
     }
 
-    public fun startCall(view: View) {
+    fun startCall(view: View) {
         val editText = findViewById<EditText>(R.id.editTextPhone)
         var phoneNumber = editText.text.toString()
         val callIntent = Intent(Intent.ACTION_DIAL)
@@ -46,15 +62,15 @@ class MainActivity : AppCompatActivity() {
         startActivity(callIntent)
     }
 
-    public fun startCallNumber(view: View) {
-        val phoneNumber = view.getTag().toString()
+    fun startCallNumber(view: View) {
+        val phoneNumber = view.tag.toString()
         val callIntent = Intent(Intent.ACTION_DIAL)
         callIntent.data = Uri.parse("tel:$phoneNumber")
         startActivity(callIntent)
     }
 
-    public fun write(view: View) {
-        val myString = view.getTag().toString()
+    fun write(view: View) {
+        val myString = view.tag.toString()
         val editText = findViewById<EditText>(R.id.editTextPhone)
         var message = editText.text.toString()
         println(myString)
